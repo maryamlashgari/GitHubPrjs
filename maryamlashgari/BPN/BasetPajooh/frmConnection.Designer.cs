@@ -116,7 +116,7 @@
             // 
             this.TempPnl.Location = new System.Drawing.Point(0, 212);
             this.TempPnl.Name = "TempPnl";
-            this.TempPnl.Size = new System.Drawing.Size(200, 100);
+            this.TempPnl.Size = new System.Drawing.Size(442, 238);
             this.TempPnl.TabIndex = 1;
             // 
             // frmConnection

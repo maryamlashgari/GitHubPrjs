@@ -21,6 +21,8 @@ namespace BasetPajooh.UserControls.Devices
         public List<byte> Adds { get; set; }
         public Thread t { get; set; }
         public SerialPort serialPort1 { get; set; }
+        public Boolean Connected { get; set; }
+        delegate void SetTemperatureCallback(string text);
         public ETP98UserCtrl()
         {
             InitializeComponent();
@@ -33,13 +35,212 @@ namespace BasetPajooh.UserControls.Devices
             serialPort1 = new SerialPort(serialPortName);
             serialPort1.BaudRate = 19200;
             serialPort1.Open();
-            t = new Thread(() => { 
-            this.BeginInvoke((Action)delegate ()
-            {
-                GetDataContinuous();
-            });
-            });
+            t = new Thread(GetDataContinuous);
             t.Start();
+        }
+
+        private void SetText(string text)
+        {
+            string[] temps = text.Split('*');
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            int i = 1;
+            foreach (var item in temps)
+            {
+                if (i == 1)
+                    if (this.tbxT1.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT1.Text = item;
+                        i++;
+                    }
+                else if (i == 2)
+                    if (this.tbxT2.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT2.Text = item;
+                        i++;
+                    }
+                else if (i == 3)
+                    if (this.tbxT3.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT3.Text = item;
+                        i++;
+                    }
+                else if (i == 4)
+                    if (this.tbxT4.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT4.Text = item;
+                        i++;
+                    }
+                else if (i == 5)
+                    if (this.tbxT5.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT5.Text = item;
+                        i++;
+                    }
+                else if (i == 6)
+                    if (this.tbxT6.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT6.Text = item;
+                        i++;
+                    }
+                else if (i == 7)
+                    if (this.tbxT7.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT7.Text = item;
+                        i++;
+                    }
+                else if (i == 8)
+                    if (this.tbxT8.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT8.Text = item;
+                        i++;
+                    }
+                else if (i == 9)
+                    if (this.tbxT9.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT9.Text = item;
+                        i++;
+                    }
+                else if (i == 10)
+                    if (this.tbxT10.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT10.Text = item;
+                        i++;
+                    }
+                else if (i == 11)
+                    if (this.tbxT11.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT11.Text = item;
+                        i++;
+                    }
+                else if (i == 12)
+                    if (this.tbxT12.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT12.Text = item;
+                        i++;
+                    }
+                else if (i == 13)
+                    if (this.tbxT13.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT13.Text = item;
+                        i++;
+                    }
+                else if (i == 14)
+                    if (this.tbxT14.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT14.Text = item;
+                        i++;
+                    }
+                else if (i == 15)
+                    if (this.tbxT15.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT15.Text = item;
+                        i++;
+                    }
+                else if (i == 16)
+                    if (this.tbxT16.InvokeRequired)
+                    {
+                        SetTemperatureCallback d = new SetTemperatureCallback(SetText);
+                        this.Invoke(d, new object[] { text });
+                        i++;
+                    }
+                    else
+                    {
+                        this.tbxT16.Text = item;
+                        i++;
+                    }
+            }
         }
 
         private void GetDataContinuous()
@@ -154,8 +355,6 @@ namespace BasetPajooh.UserControls.Devices
                         if (ok)
                         {
                             CorrectCount++;
-                            //ClearTextBoxes();
-
                             long x1 = 0;
                             for (int j = 0; j < 16; j++)
                             {
@@ -168,8 +367,7 @@ namespace BasetPajooh.UserControls.Devices
                                 x /= 0.05;
                                 x -= 40;
 
-                                RecievedTemps += "T" + (j + 1).ToString() + "= " + x.ToString() + "\r\n";
-                                tbxT1.Text = "76";
+                                RecievedTemps += x.ToString() + "*";
                                 /*
                                 comm.rtemp[st][j] = 15600.- 120.* float(x);
                                 float ttt = comm.calib.t(st, j, comm.rtemp[st][j]);
@@ -180,6 +378,7 @@ namespace BasetPajooh.UserControls.Devices
                             }
                             //////////////////////////////////
                             string Ts = RecievedTemps;
+                            SetText(RecievedTemps);
                             //////////////////////////////////
                         }
 
@@ -191,8 +390,7 @@ namespace BasetPajooh.UserControls.Devices
                     FaultCount++;
                 }
             }
-            MessageBox.Show(ok.ToString());
-            bool Checked = ok;
+            Connected = ok;
         }
 
         private void udelay(int u)
@@ -206,9 +404,5 @@ namespace BasetPajooh.UserControls.Devices
             sw.Stop();
         }
 
-        private void ClearTextBoxes()
-        {
-            tbxT1.Text = "";
-        }
     }
 }
