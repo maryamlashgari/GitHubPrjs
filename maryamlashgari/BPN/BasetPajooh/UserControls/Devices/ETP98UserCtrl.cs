@@ -18,21 +18,27 @@ namespace BasetPajooh.UserControls.Devices
     [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))]
     public partial class ETP98UserCtrl : UserControl
     {
+        public List<byte> Adds { get; set; }
+        public Thread t { get; set; }
+        public SerialPort serialPort1 { get; set; }
         public ETP98UserCtrl()
         {
             InitializeComponent();
         }
 
-        public List<byte> Adds { get; set; }
-        public Thread t { get; set; }
-        public SerialPort serialPort1 { get; set; }
         public ETP98UserCtrl(List<byte> adds, string serialPortName)
         {
+            InitializeComponent();
             Adds = adds;
             serialPort1 = new SerialPort(serialPortName);
             serialPort1.BaudRate = 19200;
             serialPort1.Open();
-            t = new Thread(GetDataContinuous);
+            t = new Thread(() => { 
+            this.BeginInvoke((Action)delegate ()
+            {
+                GetDataContinuous();
+            });
+            });
             t.Start();
         }
 

@@ -28,10 +28,10 @@ namespace BasetPajooh
         {
             List<string> ports = new List<string>();
             ports = GetAllPorts();
-            foreach (var item in ports)
+            //foreach (var item in ports)
             {
                 List<byte> addList = new List<byte>() { 0 };
-                ETP98UserCtrl ETP98 = new ETP98UserCtrl(addList, item);
+                ETP98UserCtrl ETP98 = new ETP98UserCtrl(addList, "COM5");
                 TempPnl.Controls.Add(ETP98);
             }
 

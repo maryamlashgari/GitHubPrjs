@@ -38,9 +38,7 @@
             this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.TempPnl = new System.Windows.Forms.FlowLayoutPanel();
-            this.etP98UserCtrl1 = new BasetPajooh.UserControls.Devices.ETP98UserCtrl();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.TempPnl.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -116,21 +114,10 @@
             // 
             // TempPnl
             // 
-            this.TempPnl.Controls.Add(this.etP98UserCtrl1);
             this.TempPnl.Location = new System.Drawing.Point(0, 212);
             this.TempPnl.Name = "TempPnl";
             this.TempPnl.Size = new System.Drawing.Size(200, 100);
             this.TempPnl.TabIndex = 1;
-            // 
-            // etP98UserCtrl1
-            // 
-            this.etP98UserCtrl1.Adds = null;
-            this.etP98UserCtrl1.Location = new System.Drawing.Point(3, 3);
-            this.etP98UserCtrl1.Name = "etP98UserCtrl1";
-            this.etP98UserCtrl1.serialPort1 = null;
-            this.etP98UserCtrl1.Size = new System.Drawing.Size(248, 165);
-            this.etP98UserCtrl1.t = null;
-            this.etP98UserCtrl1.TabIndex = 0;
             // 
             // frmConnection
             // 
@@ -142,7 +129,6 @@
             this.Name = "frmConnection";
             this.Text = "frmConnection";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.TempPnl.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -159,6 +145,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Status;
         private System.Windows.Forms.FlowLayoutPanel TempPnl;
-        private UserControls.Devices.ETP98UserCtrl etP98UserCtrl1;
     }
 }
