@@ -262,7 +262,7 @@ namespace BasetPajooh.UserControls.Devices
             {
                 Request(add);
                 Thread.Sleep(60);
-                Read();
+                Read(add);
             }
         }
 
@@ -305,7 +305,7 @@ namespace BasetPajooh.UserControls.Devices
 
             }
         }
-        private void Read()
+        private void Read(byte address)
         {
             bool ok = false;
 
@@ -368,18 +368,8 @@ namespace BasetPajooh.UserControls.Devices
                                 x -= 40;
 
                                 RecievedTemps += x.ToString() + "*";
-                                /*
-                                comm.rtemp[st][j] = 15600.- 120.* float(x);
-                                float ttt = comm.calib.t(st, j, comm.rtemp[st][j]);
-                                if (ttt < -50) ttt = -50;
-                                if (ttt > 150) ttt = 150;
-                                comm.tem[st][j] = ttt;
-                                */
                             }
-                            //////////////////////////////////
-                            string Ts = RecievedTemps;
                             SetText(RecievedTemps);
-                            //////////////////////////////////
                         }
 
                     }
@@ -392,7 +382,6 @@ namespace BasetPajooh.UserControls.Devices
             }
             Connected = ok;
         }
-
         private void udelay(int u)
         {
             Stopwatch sw = new Stopwatch();
@@ -403,6 +392,5 @@ namespace BasetPajooh.UserControls.Devices
                 microseconds = sw.ElapsedTicks / (Stopwatch.Frequency / (1000L * 1000L));
             sw.Stop();
         }
-
     }
 }
