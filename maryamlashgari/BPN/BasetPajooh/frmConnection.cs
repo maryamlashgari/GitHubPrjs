@@ -18,6 +18,7 @@ namespace BasetPajooh
 {
     public partial class frmConnection : Form
     {
+        ETP98UserCtrl ETP98 = null;
         public frmConnection()
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace BasetPajooh
             //foreach (var item in ports)
             {
                 List<byte> addList = new List<byte>() { 0,1 };
-                ETP98UserCtrl ETP98 = new ETP98UserCtrl(addList, "COM5");
+                ETP98 = new ETP98UserCtrl(addList, "COM5");
                 TempPnl.Controls.Add(ETP98);
             }
         }
@@ -46,5 +47,10 @@ namespace BasetPajooh
             return allPorts;
         }
 
+        private void timerConnected_Tick(object sender, EventArgs e)
+        {
+            Boolean check =ETP98.Connected;
+            MessageBox.Show(check.ToString());
+        }
     }
 }

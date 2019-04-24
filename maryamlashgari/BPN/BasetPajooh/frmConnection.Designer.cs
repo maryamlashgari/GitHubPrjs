@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Device_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,6 +39,7 @@
             this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.TempPnl = new System.Windows.Forms.FlowLayoutPanel();
+            this.timerConnected = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -119,6 +121,12 @@
             this.TempPnl.Size = new System.Drawing.Size(442, 238);
             this.TempPnl.TabIndex = 1;
             // 
+            // timerConnected
+            // 
+            this.timerConnected.Enabled = true;
+            this.timerConnected.Interval = 1000;
+            this.timerConnected.Tick += new System.EventHandler(this.timerConnected_Tick);
+            // 
             // frmConnection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -145,5 +153,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Status;
         private System.Windows.Forms.FlowLayoutPanel TempPnl;
+        private System.Windows.Forms.Timer timerConnected;
     }
 }
