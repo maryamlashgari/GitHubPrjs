@@ -39,7 +39,7 @@ namespace BasetPajooh.UserControls.Devices
             t.Start();
         }
 
-        private void SetText(string text)
+        public void SetText(string text)
         {
             string[] temps = text.Split('*');
             // InvokeRequired required compares the thread ID of the
@@ -243,27 +243,31 @@ namespace BasetPajooh.UserControls.Devices
             }
         }
 
-        private void GetDataContinuous()
+        public void GetDataContinuous()
         {
             var timer = new System.Timers.Timer() { Interval = 300 };
             timer.Enabled = true;
             timer.Start();
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            getData();
+            Connected = getData();
+
         }
 
-        private void getData()
+        private Boolean getData()
         {
+            Boolean Output = false;
             foreach (byte add in Adds)
             {
                 Request(add);
                 Thread.Sleep(60);
-                Read(add);
+                Output = Read(add);
             }
+            return Output;
         }
 
         private void Request(byte address)
@@ -305,7 +309,7 @@ namespace BasetPajooh.UserControls.Devices
 
             }
         }
-        private void Read(byte address)
+        private Boolean Read(byte address)
         {
             bool ok = false;
 
@@ -381,6 +385,7 @@ namespace BasetPajooh.UserControls.Devices
                 }
             }
             Connected = ok;
+            return Connected;
         }
         private void udelay(int u)
         {
