@@ -13,16 +13,26 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Timers;
 using BasetPajooh.UserControls.Devices;
+using BasetPajooh.Repositories;
 
 namespace BasetPajooh
 {
     public partial class frmConnection : Form
     {
         ETP98UserCtrl ETP98 = null;
+        int Counter = 0;
         public frmConnection()
         {
             InitializeComponent();
+            DataGridViewDataBind();
             func();
+        }
+        void DataGridViewDataBind()
+        {
+            ConnectionRepository Cr = new ConnectionRepository();
+            dataGridView1.DataSource = Cr.SelectAllDevices();
+            this.dataGridView1.Columns["ID"].Visible = false;
+            this.dataGridView1.Columns["Device"].Visible = false;
         }
 
         void func()
@@ -31,7 +41,7 @@ namespace BasetPajooh
             ports = GetAllPorts();
             //foreach (var item in ports)
             {
-                List<byte> addList = new List<byte>() { 0,1 };
+                List<byte> addList = new List<byte>() { 0, 1 };
                 ETP98 = new ETP98UserCtrl(addList, "COM5");
                 TempPnl.Controls.Add(ETP98);
             }
@@ -49,8 +59,19 @@ namespace BasetPajooh
 
         private void timerConnected_Tick(object sender, EventArgs e)
         {
-            Boolean check =ETP98.Connected;
-            MessageBox.Show(check.ToString());
+            Boolean check = ETP98.Connected;
+            dataGridView1_DataBindingComplete(null, null);
+        }
+
+        private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            if (Counter >= 2)
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[1];
+                    chk.Value = (ETP98.Connected == true ? 1 : 0);
+                }
+            Counter++;
         }
     }
 }
