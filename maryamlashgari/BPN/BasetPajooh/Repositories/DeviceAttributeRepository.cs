@@ -15,7 +15,7 @@ namespace BasetPajooh.Repositories
 
         }
 
-        public bool InsertDeviceAttribute(int Device_ID, string IP, string VID, string PID, string SerialNum, string Address)
+        public bool InsertDeviceAttribute(int Device_ID, string IP, string VID, string PID, string SerialNum, byte Address)
         {
             DataBaseContext oDbContext = null;
             oDbContext = new DataBaseContext();
@@ -40,7 +40,7 @@ namespace BasetPajooh.Repositories
             return DeviceAttributes;
         }
 
-        public bool UpdateDeviceAttribute(int id, string IP, string VID, string PID, string SerialNum, string Address)
+        public bool UpdateDeviceAttribute(int id, string IP, string VID, string PID, string SerialNum, byte Address)
         {
             DataBaseContext oDbContext = null;
             oDbContext = new DataBaseContext();

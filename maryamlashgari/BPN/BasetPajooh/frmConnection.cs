@@ -25,25 +25,44 @@ namespace BasetPajooh
         {
             InitializeComponent();
             DataGridViewDataBind();
-            func();
+            LoadUserControls();
         }
         void DataGridViewDataBind()
         {
-            ConnectionRepository Cr = new ConnectionRepository();
-            dataGridView1.DataSource = Cr.SelectAllDevices();
+            dataGridView1.DataSource = GetData();
             this.dataGridView1.Columns["ID"].Visible = false;
             this.dataGridView1.Columns["Device"].Visible = false;
         }
 
-        void func()
+        List<Models.DeviceAttribute> GetData()
         {
-            List<string> ports = new List<string>();
-            ports = GetAllPorts();
-            //foreach (var item in ports)
+            ConnectionRepository Cr = new ConnectionRepository();
+            return Cr.SelectAllDevices();
+        }
+
+        void LoadUserControls()
+        {
+            List<Models.DeviceAttribute> Devices = new List<Models.DeviceAttribute>();
+            Devices = GetData();
+            ConnectionRepository Cr = new ConnectionRepository();
+            Dictionary<string, int> dec = Cr.GetComportCategory();
+            foreach (var item in dec)
             {
-                List<byte> addList = new List<byte>() { 0, 1 };
-                ETP98 = new ETP98UserCtrl(addList, "COM5");
-                TempPnl.Controls.Add(ETP98);
+                List<byte> addList = new List<byte>();
+                int j = 0;
+                foreach (var device in Devices.Select((value, i) => new { i, value }))
+                {
+                    if (device.value.Comport == item.Key)
+                    {
+                        addList.Add(device.value.Address);
+                        if (j == item.Value - 1)
+                        {
+                            ETP98 = new ETP98UserCtrl(addList, device.value.Comport);
+                            TempPnl.Controls.Add(ETP98);
+                        }
+                        j++;
+                    }
+                }
             }
         }
 
@@ -59,7 +78,6 @@ namespace BasetPajooh
 
         private void timerConnected_Tick(object sender, EventArgs e)
         {
-            Boolean check = ETP98.Connected;
             dataGridView1_DataBindingComplete(null, null);
         }
 
@@ -68,10 +86,20 @@ namespace BasetPajooh
             if (Counter >= 2)
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
+                    byte add = Convert.ToByte(row.Cells["address"].Value);
                     DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[1];
-                    chk.Value = (ETP98.Connected == true ? 1 : 0);
+                    chk.Value = (ETP98.Connected[add] == true ? 1 : 0);
                 }
             Counter++;
+        }
+
+        private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // =
+            int rowIndex = e.RowIndex;
+            DataGridViewRow row = dataGridView1.Rows[rowIndex];
+            ETP98.DisplayedAdd = Convert.ToByte(row.Cells[10].Value);
+            ETP98.DisplayedComport = row.Cells[4].Value.ToString();
         }
     }
 }

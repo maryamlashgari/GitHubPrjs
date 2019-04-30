@@ -37,7 +37,7 @@ namespace BasetPajooh
                 {
                     DeviceAttributeRepository dar = new DeviceAttributeRepository();
                     bool response = dar.InsertDeviceAttribute(Convert.ToInt32(cmbDevice.SelectedValue), tbxIP.Text,
-                        tbxVID.Text, tbxPID.Text, tbxSerialNum.Text, tbxAddrdss.Text);
+                        tbxVID.Text, tbxPID.Text, tbxSerialNum.Text,Convert.ToByte(tbxAddrdss.Text));
                     if (response)
                     {
                         MessageBox.Show("اطلاعات با موفقیت ثبت شد.");
@@ -63,7 +63,7 @@ namespace BasetPajooh
             {
                 DeviceAttributeRepository dar = new DeviceAttributeRepository();
                 bool response = dar.UpdateDeviceAttribute(DeviceAttributeID, tbxIP.Text,
-                    tbxVID.Text, tbxPID.Text, tbxSerialNum.Text, tbxAddrdss.Text);
+                    tbxVID.Text, tbxPID.Text, tbxSerialNum.Text, Convert.ToByte(tbxAddrdss.Text));
                 if (response)
                 {
                     MessageBox.Show("ویرایش با موفقیت انجام شد.");

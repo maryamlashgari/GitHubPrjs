@@ -60,6 +60,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(796, 206);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
+            this.dataGridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseClick);
             // 
             // ID
             // 
